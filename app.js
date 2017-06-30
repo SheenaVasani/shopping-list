@@ -1,38 +1,32 @@
-function addProduct() {
-    var productName = $('#shopping-list-entry').val();
-
-
-  
-//   var section += '<li>' + <p class="shopping-item"> + productName + '</p>' + '</li>';
+$(function() {
   
   
-   { var section = '';
-        section += '<li>';
-        section += '<p class="shopping-item">' + productName + '</p>';
-        section += '<button class="shopping-item-delete">';
-        section += '<span class="button-label">delete</span>';
-        section += '</button>';
-        section += '</li>';
-
-        
-        $('.shopping-list').append(section);
-
-        $('#shopping-list-entry').val('');
-    }
-}
 
 
-function deleteItem() {
-    $(this).closest('li').remove();
-}
+
+//Event listeners
 
 
-$(document).ready(function () {
-    $('#js-shopping-list-form').submit(function (event) {
-        event.preventDefault();
-        addProduct();
-    });
+$('.js-form').submit(function(event) {
+  event.preventDefault();
+  var userTextElement = $(event.currentTarget).find('#user-text');
+ //for each input user submits, store and keep placing in list
+//add input to list
+  
+  $(".js-display-user-text").append('<li> Item: ' + userTextElement.val() + '</li>' + 
+    '<button class="delete">Delete</button><button class="check">Check</button>');
+  userTextElement.val("");
+    $('.delete').click(function () { 
+          $(this).parent().remove();
+
+
+  });
+  
+   $(".check").click(function (event) {
+   $(this).parent().css("text-decoration", "line-through");
 
 });
-
-$(document).on('click', '.shopping-item-delete', deleteItem);
+  
+});
+  
+  });
